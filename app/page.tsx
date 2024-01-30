@@ -1,10 +1,9 @@
-import Hero from '@/components/hero'
-
-
+import Hero from "@/components/hero";
 
 export default function Home() {
   return (
-    <Hero/>
-
-  )
+    <div className="grid place-items-center py-20">
+      <Hero />
+    </div>
+  );
 }

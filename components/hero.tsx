@@ -6,6 +6,7 @@ import { Button } from "./ui/button";
 import { useRouter, useSearchParams } from "next/navigation";
 
 import { ApiResponse } from "@/types/apiresponse";
+import Image from "next/image";
 
 const Hero = () => {
   const inputRef = useRef<HTMLInputElement>(null);
@@ -23,10 +24,12 @@ const Hero = () => {
     (async () => {
       try {
         const response = await fetch(`https://api.github.com/users/${userId}`);
+        
         if (!response.ok) {
           throw new Error(await response.text());
         }
         const data: ApiResponse = await response.json();
+        console.log(data);
         setData(data);
       } catch (error) {
         const err =
@@ -63,9 +66,17 @@ const Hero = () => {
         <h1>Loading...</h1>
       ) : data && !error ? (
         <>
+        <div className="flex gap-10 justify-center items-start py-4">
+          <Image src={data.avatar_url} width={200} height={200} alt="avatar" className="rounded-full border-2 border-white p-2"/>
+          <div className="space-y-2 py-6  ">
+          {data.name?<div className="text-lg font-bold">{data.name}</div>:<div className="text-lg font-bold">{data.login}</div>}
+         
           <div>{data.bio}</div>
-          <div>{data.name}</div>
-          <img src={data.avatar_url} alt="photo" />
+          <div>
+            {data.company}
+          </div>
+          </div>
+        </div>
         </>
       ) : (
         error && <h1>{error}</h1>
