@@ -4,12 +4,9 @@ import { Landing } from "@/components/landing";
 
 export default function Home() {
   return (
-    <div className="grid place-items-center py-20">
-
-
+    <div className="h-screen flex items-center justify-center py-20">
       {/*<Hero />*/}
       <Landing />
-
     </div>
   );
 }

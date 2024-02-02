@@ -29,7 +29,7 @@ function AuthButton(){
 
 const NavBar = () => {
   return (
-    <div className="py-5 px-10 flex justify-between items-center">
+    <div className="py-5 px-10 flex justify-between items-center absolute top-0 left-0 w-full">
       <h1 className=" text-4xl font-black tracking-wider">
         Git<span className="text-red-600">Stats</span>.
       </h1>
