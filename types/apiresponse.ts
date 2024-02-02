@@ -1,4 +1,9 @@
 export interface ApiResponse {
+  user: User;
+  accessToken: string;
+  }
+
+  interface User {
     login: string
     id: number
     node_id: string
@@ -32,3 +37,5 @@ export interface ApiResponse {
     created_at: string
     updated_at: string
   }
+  
+ 

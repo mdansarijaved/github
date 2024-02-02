@@ -10,6 +10,7 @@ function AuthButton(){
   const {data: session} = useSession(); 
 
   if(session){
+    console.log(session?.user?.name)
     return (
       <>
        <div className="rounded-full">
