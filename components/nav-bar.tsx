@@ -4,13 +4,14 @@ import { ModeToggle } from "./theme-toggle";
 import Link from "next/link";
 import Image from "next/image";
 import {signIn,signOut, useSession } from "next-auth/react";
+import { useRouter } from "next/navigation";
 import { Button } from "./ui/button";
 
 function AuthButton(){
   const {data: session} = useSession(); 
+  const router = useRouter(); 
 
   if(session){
-    console.log(session?.user?.name)
     return (
       <>
        <div className="rounded-full">
