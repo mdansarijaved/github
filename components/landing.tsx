@@ -1,8 +1,9 @@
-import react from "react";
-function Landing() {
-    return (
-        <>
-            <h1>Landing</h1>
-        </>
-    )
+import React from 'react'
+
+const landing = () => {
+  return (
+    <div>landing</div>
+  )
 }
+
+export default landing
