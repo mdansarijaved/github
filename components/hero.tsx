@@ -67,7 +67,7 @@ const Hero = () => {
       ) : data && !error ? (
         <>
         <div className="flex gap-10 justify-center items-start py-4">
-          <Image src={data.avatar_url} width={200} height={200} alt="avatar" className="rounded-full border-2 border-white p-2"/>
+          {/* <Image src={data.avatar_url} width={200} height={200} alt="avatar" className="rounded-full border-2 border-white p-2"/>
           <div className="space-y-2 py-6  ">
           {data.name?<div className="text-lg font-bold">{data.name}</div>:<div className="text-lg font-bold">{data.login}</div>}
          
@@ -75,7 +75,7 @@ const Hero = () => {
           <div>
             {data.company}
           </div>
-          </div>
+          </div> */}
         </div>
         </>
       ) : (

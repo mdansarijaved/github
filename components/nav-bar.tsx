@@ -4,13 +4,14 @@ import { ModeToggle } from "./theme-toggle";
 import Link from "next/link";
 import Image from "next/image";
 import {signIn,signOut, useSession } from "next-auth/react";
+import { useRouter } from "next/navigation";
 import { Button } from "./ui/button";
 
 function AuthButton(){
   const {data: session} = useSession(); 
+  const router = useRouter(); 
 
   if(session){
-    console.log(session?.user?.name)
     return (
       <>
        <div className="rounded-full">
@@ -28,7 +29,7 @@ function AuthButton(){
 
 const NavBar = () => {
   return (
-    <div className="py-5 px-10 flex justify-between items-center">
+    <div className="py-5 px-10 flex justify-between items-center absolute top-0 left-0 w-full">
       <h1 className=" text-4xl font-black tracking-wider">
         Git<span className="text-red-600">Stats</span>.
       </h1>

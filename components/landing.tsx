@@ -9,5 +9,5 @@ export function Landing() {
       <Button variant ={'secondary'}>Sign Up</Button>
       </div>
     </div>
-  )
+  );
 }

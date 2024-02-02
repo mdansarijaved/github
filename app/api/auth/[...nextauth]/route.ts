@@ -1,4 +1,4 @@
-import { ApiResponse } from "@/types/apiresponse";
+import {  ApiResponse, User } from "@/types/apiresponse";
 import NextAuth from "next-auth";
 import GithubProvider from "next-auth/providers/github";
 
@@ -17,7 +17,7 @@ export const authOptions = {
             },
           });
           const user = await userResponse.json();
-       
+          console.log(user);  
           session.accessToken = token.accessToken;
           session.user.login = user.login;
           session.user.url = user.url;
@@ -32,7 +32,7 @@ export const authOptions = {
           session.user.bio = user.bio;
           return session;
         },
-        async jwt({ token, user, account }:{token:any, user:any, account:any}) {
+        async jwt({ token, user, account }:{token:any, user:User, account:any}) {
           if (user) {
             token.id = user.id;
           }
