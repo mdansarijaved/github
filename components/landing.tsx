@@ -6,7 +6,7 @@ export function Landing() {
       <p className ='flex justify-center'>Manage your issues with ease.</p>
       <div className='flex justify-center gap-4 pt-4'>
       <Button variant ={'default'}>Login</Button>
-      <Button variant ={'default'}>Sign Up</Button>
+      <Button variant ={'secondary'}>Sign Up</Button>
       </div>
     </div>
   )
