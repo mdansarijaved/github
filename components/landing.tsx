@@ -1,5 +1,13 @@
+import { authOptions } from "@/app/api/auth/[...nextauth]/route";
 import { Button } from "./ui/button";
-export function Landing() {
+import { getServerSession } from "next-auth";
+import { redirect } from "next/navigation";
+
+export async function Landing() {
+  const session = await getServerSession(authOptions);
+  if (session){
+    redirect('/dashboard');
+  }
   return(
     <div>
       <h1 className ='text-xl font-bold md:text-3xl lg:text-[44px] font-mono'>Welcome to Github Issue Tracker</h1>

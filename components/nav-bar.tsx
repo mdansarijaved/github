@@ -15,10 +15,10 @@ function AuthButton(){
     return (
       <>
        <div className="rounded-full">
-        <Image src={session?.user?.image ?? ""} alt="profile" width={40} height={40} className="rounded-full"/>
+       
        </div>
         <br />
-        <Button variant={'secondary'} onClick={() => signOut()}>Sign Out</Button>
+        {/* <Button variant={'secondary'} onClick={() => signOut()}>Sign Out</Button> */}
       </>
     )
   }
@@ -29,7 +29,7 @@ function AuthButton(){
 
 const NavBar = () => {
   return (
-    <div className="py-5 px-10 flex justify-between items-center absolute top-0 left-0 w-full">
+    <div className="py-5 px-10 flex justify-between items-center ">
       <h1 className=" text-4xl font-black tracking-wider">
         Git<span className="text-red-600">Stats</span>.
       </h1>
