@@ -1,13 +1,14 @@
-'use client'
-import { useSession } from "next-auth/react"
+import { getServerSession } from "next-auth"
+import { authOptions } from "../api/auth/[...nextauth]/route"
 
-const Dashboard = () => {
-  const {data: session} = useSession(); 
-  console.log(session)
+const Dashboard = async() => {
+  const session= await getServerSession(authOptions);
+  console.log(session?.user.login)
  if(session){
+
   return(
     <div>
-      youre logged in as {session?.user?.login}
+      
     </div>
   )
  }

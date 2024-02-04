@@ -1,8 +1,7 @@
-import {  ApiResponse, User } from "@/types/apiresponse";
-import NextAuth from "next-auth";
+import NextAuth, { AuthOptions } from "next-auth";
 import GithubProvider from "next-auth/providers/github";
 
-export const authOptions = {
+export const authOptions:AuthOptions = {
     providers:[
         GithubProvider({
             clientId: process.env.GITHUB_ID ?? "",
@@ -10,15 +9,14 @@ export const authOptions = {
         }),
     ],
     callbacks: {
-        async session({ session, token }:{session:ApiResponse, token:ApiResponse}) {
+        async session({ session, token }) {
           const userResponse = await fetch('https://api.github.com/user', {
             headers: {
               Authorization: `token ${token.accessToken}`,
             },
           });
-          const user = await userResponse.json();
-          console.log(user);  
-          session.accessToken = token.accessToken;
+          const user = await userResponse.json(); 
+          session.user.accessToken = token.accessToken;
           session.user.login = user.login;
           session.user.url = user.url;
           session.user.repos_url = user.repos_url;
@@ -32,11 +30,11 @@ export const authOptions = {
           session.user.bio = user.bio;
           return session;
         },
-        async jwt({ token, user, account }:{token:any, user:User, account:any}) {
+        async jwt({ token, user, account }) {
           if (user) {
             token.id = user.id;
           }
-          if (account) {
+          if (account && account.access_token) {
             token.accessToken = account.access_token;
           }
           return token;

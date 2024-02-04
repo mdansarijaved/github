@@ -6,7 +6,7 @@ import "./globals.css";
 import NavBar from "@/components/nav-bar";
 import SessionProvider from "@/components/sessionProvider";
 import { getServerSession } from "next-auth";
-export const fontSans = FontSans({
+const fontSans = FontSans({
   subsets: ["latin"],
   variable: "--font-sans",
 });
