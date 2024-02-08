@@ -18,7 +18,7 @@ function AuthButton(){
        
        </div>
         <br />
-        {/* <Button variant={'secondary'} onClick={() => signOut()}>Sign Out</Button> */}
+         <Button variant={'secondary'} onClick={() => signOut()}>Sign Out</Button>
       </>
     )
   }
