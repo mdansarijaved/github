@@ -1,43 +1,42 @@
 'use client'
 import React from "react";
 import { ModeToggle } from "./theme-toggle";
-import Link from "next/link";
-import Image from "next/image";
-import {signIn,signOut, useSession } from "next-auth/react";
+import { signIn, signOut } from "next-auth/react";
+import { getServerSession } from "next-auth";
 
 import { Button } from "./ui/button";
+import Link from "next/link";
 
-
-function AuthButton(){
-  const {data: session} = useSession();
-  if(session){
-
+const AuthButton = async() => {
+  const  session = await getServerSession(); 
+  if (session) {
     return (
       <>
-       <div className="rounded-full">
-       
-       </div>
+        <div className="rounded-full"></div>
         <br />
-         <Button variant={'secondary'} onClick={() => signOut()}>Sign Out</Button>
+        <Button variant={"secondary"} onClick={() => signOut()}>
+          Sign Out
+        </Button>
       </>
-    )
+    );
   }
-  return(
-    <Button variant={"default"} onClick={() => signIn()}>Sign In</Button>
-  )
+  return (
+    <Button variant={"default"} onClick={() => signIn()}>
+      Sign In
+    </Button>
+  );
 }
 
 const NavBar = () => {
   return (
     <div className="py-5 px-10 flex justify-between items-center ">
-      <h1 className=" text-4xl font-black tracking-wider">
+      <Link href={'/'} className=" text-4xl font-black tracking-wider">
         Git<span className="text-red-600">Stats</span>.
-      </h1>
+      </Link>
       <div className="flex justify-center items-center gap-5">
-      <AuthButton/>
-      <ModeToggle />
+        <AuthButton />
+        <ModeToggle />
       </div>
-
     </div>
   );
 };
