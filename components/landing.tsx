@@ -3,14 +3,15 @@ import { authOptions } from "@/app/api/auth/[...nextauth]/route";
 import { Button } from "./ui/button";
 import { getServerSession } from "next-auth";
 import Link from "next/link"
-import { signIn } from "next-auth/react";
 import ButtonIn from "./login";
 
 export async function Landing() {
   const session = await getServerSession(authOptions);
-
+  
+ 
   return (
-    <div>
+    <div  className="">
+   
       <h1 className="text-xl font-bold md:text-3xl lg:text-[44px] font-mono">
         Welcome to Github Issue Tracker
       </h1>
@@ -20,7 +21,9 @@ export async function Landing() {
         {
           session ? <Button ><Link href="/dashboard">Dashboard</Link></Button> : <ButtonIn/>
         }
-       
+       <div>
+        
+       </div>
        
       </div>
     </div>

@@ -24,10 +24,10 @@ export default async function RootLayout({
   const session = await getServerSession(); 
 
   return (
-    <html lang="en">
+    <html suppressHydrationWarning lang="en" className="h-full">
       <body
         className={cn(
-          "min-h-screen bg-background font-sans antialiased",
+          " bg-background font-sans antialiased h-full relative ",
           fontSans.variable
         )}
       >
@@ -36,7 +36,7 @@ export default async function RootLayout({
             attribute="class"
             defaultTheme="system"
             enableSystem
-            disableTransitionOnChange
+            // disableTransitionOnChange
             >
             <NavBar/>
             {children}

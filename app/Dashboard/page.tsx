@@ -10,12 +10,24 @@ import Image from "next/image";
 
 const Dashboard = async() => {
   const session= await getServerSession(authOptions);
-  console.log(session?.user.login)
+  const url = session?.user?.repos_url;
+  if(url){
+    const repos = await fetch(url,{
+      headers:{
+        Authorization: `token ${session?.user.accessToken}`
+      }
+    });
+    const data = await repos.json();
+    console.log(data);
+  }
+  
+
+ 
  if(!session){
   redirect('/');
  }
  return (
-  <div className="flex flex-col w-full min-h-screen">
+  <div className="flex flex-col w-full h-full pt-20 ">
     <header className="flex items-center h-16 px-4 border-b shrink-0 md:px-6">
       <nav className="flex-col hidden gap-6 text-lg font-medium md:flex md:flex-row md:items-center md:gap-5 md:text-sm lg:gap-6">
         <Link className="flex items-center gap-2 text-lg font-semibold md:text-base" href="#">
@@ -59,7 +71,7 @@ const Dashboard = async() => {
         </Button>
       </div>
     </header>
-    <main className="flex min-h-[calc(100vh_-_theme(spacing.16))] flex-1 flex-col gap-4 p-4 md:gap-8 md:p-10">
+    <main className="flex  flex-1 flex-col gap-4 p-4 md:gap-8 md:p-10">
       <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-4">
         <Card>
           <CardHeader className="flex flex-row items-center justify-between pb-2 space-y-0">

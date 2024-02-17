@@ -1,14 +1,13 @@
 'use client'
 import React from "react";
 import { ModeToggle } from "./theme-toggle";
-import { signIn, signOut } from "next-auth/react";
-import { getServerSession } from "next-auth";
-
+import { signIn, signOut, useSession } from "next-auth/react";
 import { Button } from "./ui/button";
 import Link from "next/link";
 
-const AuthButton = async() => {
-  const  session = await getServerSession(); 
+
+const AuthButton = () => {
+  const session = useSession();
   if (session) {
     return (
       <>
@@ -29,12 +28,12 @@ const AuthButton = async() => {
 
 const NavBar = () => {
   return (
-    <div className="py-5 px-10 flex justify-between items-center ">
-      <Link href={'/'} className=" text-4xl font-black tracking-wider">
+    <div className="py-5 px-4 xl:px-10 flex justify-between items-center self-start w-full absolute top-0 inset-x-0 z-20">
+      <Link href={'/'} className="text-2xl xl:text-4xl font-black tracking-wider">
         Git<span className="text-red-600">Stats</span>.
       </Link>
       <div className="flex justify-center items-center gap-5">
-        <AuthButton />
+        <AuthButton  />
         <ModeToggle />
       </div>
     </div>
