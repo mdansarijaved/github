@@ -5,12 +5,13 @@ export const authOptions:AuthOptions = {
     providers:[
         GithubProvider({
             clientId: process.env.GITHUB_ID ?? "",
-            clientSecret: process.env.GITHUB_SECRET ?? ""
+            clientSecret: process.env.GITHUB_SECRET ?? "",
         }),
     ],
     callbacks: {
         async session({ session, token }) {
           const userResponse = await fetch('https://api.github.com/user', {
+          
             headers: {
               Authorization: `token ${token.accessToken}`,
             },

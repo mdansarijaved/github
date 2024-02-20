@@ -30,7 +30,7 @@ const NavBar = () => {
   return (
     <div className="py-5 px-4 xl:px-10 flex justify-between items-center self-start w-full absolute top-0 inset-x-0 z-20">
       <Link href={'/'} className="text-2xl xl:text-4xl font-black tracking-wider">
-        Git<span className="text-red-600">Stats</span>.
+        Git<span className="text-violet-600">Stats</span>.
       </Link>
       <div className="flex justify-center items-center gap-5">
         <AuthButton  />
