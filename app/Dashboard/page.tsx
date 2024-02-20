@@ -15,21 +15,22 @@ import {
 } from "@/components/ui/table";
 import Image from "next/image";
 import { Suspense } from "react";
+import TableRowLink from "./components/tablerown";
 
 const Dashboard = async () => {
   const session = await getServerSession(authOptions);
   const response = await fetch(
-    `https://api.github.com/search/issues?q=author:${session?.user.login}`,
-    // `https://api.github.com/search/issues?q=author:pallabez`,
-    {
-      headers: {
-        Authorization: `token ${session?.user.accessToken}`,
-      },
-    }
+    // `https://api.github.com/search/issues?q=author:${session?.user.login}`,
+    `https://api.github.com/search/issues?q=author:pallabez`,
+    // {
+    //   headers: {
+    //     Authorization: `token ${session?.user.accessToken}`,
+    //   },
+    // }
   );
   const data = await response.json();
   // console.log(data);
-  console.log(data.total_count);
+  // console.log(data); 
 
   const closedIssues = data?.items.reduce(
     (acc: number, issue: any) => acc + (issue.state === "closed" ? 1 : 0),
@@ -42,85 +43,84 @@ const Dashboard = async () => {
 
   if (!session) {
     redirect("/");
+    return null;
   }
   return (
     // <Suspense fallback={<div>Loading...</div>}>
-      <main className="flex  flex-1 flex-col gap-4 p-4 md:gap-8 md:p-10">
-        <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-4">
-          <Card>
-            <CardHeader className="flex flex-row items-center justify-between pb-2 space-y-0">
-              <CardTitle className="text-sm font-medium">Open Issues</CardTitle>
-            </CardHeader>
-            <CardContent>
-              <div className="text-2xl font-bold">
-                {data.total_count ? data.total_count : null}
-              </div>
-              {/* <p className="text-xs text-gray-500 dark:text-gray-400">+20.1% from last month</p> */}
-            </CardContent>
-          </Card>
-          <Card>
-            <CardHeader className="flex flex-row items-center justify-between pb-2 space-y-0">
-              <CardTitle className="text-sm font-medium">
-                Closed Issues
-              </CardTitle>
-            </CardHeader>
-            <CardContent>
-              <div className="text-2xl font-bold">{closedIssues}</div>
-              {/* <p className="text-xs text-gray-500 dark:text-gray-400">+180.1% from last month</p> */}
-            </CardContent>
-          </Card>
-          <Card>
-            <CardHeader className="flex flex-row items-center justify-between pb-2 space-y-0">
-              <CardTitle className="text-sm font-medium">
-                In Progress Issues
-              </CardTitle>
-            </CardHeader>
-            <CardContent>
-              <div className="text-2xl font-bold">{inProgess}</div>
-              {/* <p className="text-xs text-gray-500 dark:text-gray-400">+19% from last month</p> */}
-            </CardContent>
-          </Card>
-          <Card>
-            <CardHeader className="flex flex-row items-center justify-between pb-2 space-y-0">
-              <CardTitle className="text-sm font-medium">Active Now</CardTitle>
-            </CardHeader>
-            <CardContent>
-              <div className="text-2xl font-bold">+573</div>
-              <p className="text-xs text-gray-500 dark:text-gray-400">
-                +201 since last hour
-              </p>
-            </CardContent>
-          </Card>
-        </div>
-        <div>
-          <Card>
-            <Table>
-              <TableHeader>
-                <TableRow>
-                  <TableHead className="w-[100px]">Issue</TableHead>
-                  <TableHead>Status</TableHead>
-                  <TableHead>Labels</TableHead>
-                  <TableHead className="text-right">Assignee</TableHead>
-                </TableRow>
-              </TableHeader>
-              <TableBody>
-                <Suspense fallback={<div>Loading...</div>}>
+    <main className="flex  flex-1 flex-col gap-4 p-4 md:gap-8 md:p-10">
+              {/* <Suspense fallback={<div>Loading...</div>}> */}
+      <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-4">
+        <Card>
+          <CardHeader className="flex flex-row items-center justify-between pb-2 space-y-0">
+            <CardTitle className="text-sm font-medium">Open Issues</CardTitle>
+          </CardHeader>
+          <CardContent>
+            <div className="text-2xl font-bold">
+              {data.total_count ? data.total_count : null}
+            </div>
+            <p className="text-xs text-gray-500 dark:text-gray-400">+20.1% from last month</p>
+          </CardContent>
+        </Card>
+        <Card>
+          <CardHeader className="flex flex-row items-center justify-between pb-2 space-y-0">
+            <CardTitle className="text-sm font-medium">Closed Issues</CardTitle>
+          </CardHeader>
+          <CardContent>
+            <div className="text-2xl font-bold">{closedIssues}</div>
+            <p className="text-xs text-gray-500 dark:text-gray-400">+180.1% from last month</p>
+          </CardContent>
+        </Card>
+        <Card>
+          <CardHeader className="flex flex-row items-center justify-between pb-2 space-y-0">
+            <CardTitle className="text-sm font-medium">
+              In Progress Issues
+            </CardTitle>
+          </CardHeader>
+          <CardContent>
+            <div className="text-2xl font-bold">{inProgess}</div>
+            <p className="text-xs text-gray-500 dark:text-gray-400">+19% from last month</p>
+          </CardContent>
+        </Card>
+        <Card>
+          <CardHeader className="flex flex-row items-center justify-between pb-2 space-y-0">
+            <CardTitle className="text-sm font-medium">Active Now</CardTitle>
+          </CardHeader>
+          <CardContent>
+            <div className="text-2xl font-bold">+573</div>
+            <p className="text-xs text-gray-500 dark:text-gray-400">
+              +201 since last hour
+            </p>
+          </CardContent>
+        </Card>
+      </div>
+      <div>
+        <Card>
+          <Table>
+            <TableHeader>
+              <TableRow>
+                <TableHead className="">Issue</TableHead>
+                <TableHead>Status</TableHead>
+                <TableHead>Labels</TableHead>
+                <TableHead>Progress</TableHead>
+                <TableHead className="text-center">Assignee</TableHead>
+              </TableRow>
+            </TableHeader>
+            <TableBody>
                 {data.items.map((issue: any) => (
-                  <TableRow key={issue.id}>
-                    <TableCell className="font-medium">{issue.id}</TableCell>
-                    <TableCell>{issue.state}</TableCell>
-                    <TableCell>{issue.label ? issue.label : "null"}</TableCell>
-                    <TableCell className="text-right">
-                      {issue.assignee ? issue.assignee : "self"}
-                    </TableCell>
-                  </TableRow>
+                  // <Link href={`/issues/${issue.id}`} key={issue.id}>
+                  <TableRowLink
+                    key={issue.id}
+                    issue={issue}
+                    // session={session}
+                  />
+                  // </Link>
                 ))}
-                </Suspense>
-              </TableBody>
-            </Table>
-          </Card>
-        </div>
-      </main>
+            </TableBody>
+          </Table>
+        </Card>
+      </div>
+              {/* </Suspense> */}
+    </main>
     // </Suspense>
   );
 };
