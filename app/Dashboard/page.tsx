@@ -1,9 +1,6 @@
 import { getServerSession } from "next-auth";
 import { authOptions } from "../api/auth/[...nextauth]/route";
 import { redirect } from "next/navigation";
-import Link from "next/link";
-import { Input } from "@/components/ui/input";
-import { Button } from "@/components/ui/button";
 import { CardTitle, CardHeader, CardContent, Card } from "@/components/ui/card";
 import {
   TableHead,
@@ -13,30 +10,30 @@ import {
   TableBody,
   Table,
 } from "@/components/ui/table";
-import Image from "next/image";
-import { Suspense } from "react";
 import TableRowLink from "./components/tablerown";
+import { fetchData } from "@/lib/utils";
+import PaginationComponent from "./components/pagination";
 
-const Dashboard = async () => {
+const Dashboard = async ({searchParams}:{searchParams:{[key: string]: string | string[] | undefined}}) => {
   const session = await getServerSession(authOptions);
-  const response = await fetch(
-    // `https://api.github.com/search/issues?q=author:${session?.user.login}`,
-    `https://api.github.com/search/issues?q=author:pallabez`,
-    // {
-    //   headers: {
-    //     Authorization: `token ${session?.user.accessToken}`,
-    //   },
-    // }
-  );
-  const data = await response.json();
+  const entries = await fetchData('https://api.github.com/search/issues?q=repo:facebook/react+type:issue')
+
   // console.log(data);
   // console.log(data); 
+  const page = searchParams['page']??'1'; 
+  const per_page= searchParams['per_page']??'10';
 
-  const closedIssues = data?.items.reduce(
+  const start = (Number(page) - 1) * Number(per_page);  
+  const end = start + Number(per_page);
+
+  const  data = entries.items.slice(start, end);
+
+
+  const closedIssues = entries?.items.reduce(
     (acc: number, issue: any) => acc + (issue.state === "closed" ? 1 : 0),
     0
   );
-  const inProgess = data?.items.reduce(
+  const inProgess = entries?.items.reduce(
     (acc: number, issues: any) => acc + (issues.state === "open" ? 1 : 0),
     0
   );
@@ -106,11 +103,12 @@ const Dashboard = async () => {
               </TableRow>
             </TableHeader>
             <TableBody>
-                {data.items.map((issue: any) => (
+                {data.map((issue: any) => (
                   // <Link href={`/issues/${issue.id}`} key={issue.id}>
                   <TableRowLink
                     key={issue.id}
                     issue={issue}
+                    issueLink={issue.html_url}
                     // session={session}
                   />
                   // </Link>
@@ -120,6 +118,7 @@ const Dashboard = async () => {
         </Card>
       </div>
               {/* </Suspense> */}
+              <PaginationComponent hasNextPage={true} hasPreviousPage={true} />
     </main>
     // </Suspense>
   );

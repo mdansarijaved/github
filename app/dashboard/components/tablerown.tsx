@@ -5,12 +5,12 @@ import Link from "next/link";
 import { useRouter } from "next/navigation";
 import React from "react";
 
-const TableRowLink = ({issue}:{issue:any}) => {
-     
+const TableRowLink = ({issue,issueLink}:{issue:any,issueLink:string}) => {
+    
   return (
     <TableRow key={issue.id} >
       <TableCell className="font-medium ">
-        <Link className="hover:underline" href={`/dashboard/issues/${issue.id}`}>
+        <Link className="hover:underline" href={issueLink}>
         {issue.title}
         </Link>
         </TableCell>
