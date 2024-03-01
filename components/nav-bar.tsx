@@ -8,7 +8,7 @@ import Link from "next/link";
 
 const AuthButton = () => {
   const session = useSession();
-  if (session) {
+  if (session.status == 'authenticated') {
     return (
       <>
         <div className="rounded-full"></div>

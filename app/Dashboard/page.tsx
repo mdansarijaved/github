@@ -53,7 +53,7 @@ const Dashboard = async ({searchParams}:{searchParams:{[key: string]: string | s
           </CardHeader>
           <CardContent>
             <div className="text-2xl font-bold">
-              {data.total_count ? data.total_count : null}
+              {entries.total_count ? entries.total_count : 0}
             </div>
             <p className="text-xs text-gray-500 dark:text-gray-400">+20.1% from last month</p>
           </CardContent>
