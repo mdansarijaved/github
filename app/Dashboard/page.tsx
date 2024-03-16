@@ -10,9 +10,9 @@ import {
   TableBody,
   Table,
 } from "@/components/ui/table";
-import TableRowLink from "./components/tablerown";
+import TableRowLink from "@/components/tablerown";
 import { fetchData } from "@/lib/utils";
-import PaginationComponent from "./components/pagination";
+import PaginationComponent from "@/components/pagination";
 
 const Dashboard = async ({searchParams}:{searchParams:{[key: string]: string | string[] | undefined}}) => {
   const session = await getServerSession(authOptions);
