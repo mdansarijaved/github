@@ -3,7 +3,7 @@ import { cn } from "../../lib/utils";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import Image from "next/image";
-import { authOptions } from "../api/auth/[...nextauth]/route";
+import authOptions from "@/lib/auth";
 import { getServerSession } from "next-auth";
 
 export default async function RootLayout({
