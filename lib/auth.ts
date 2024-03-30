@@ -1,5 +1,5 @@
 import { AuthOptions } from "next-auth";
-import NextAuth from "next-auth/next";
+
 import GithubProvider from "next-auth/providers/github";
 
 const authOptions:AuthOptions = {
@@ -7,6 +7,7 @@ const authOptions:AuthOptions = {
         GithubProvider({
             clientId: process.env.GITHUB_ID ?? "",
             clientSecret: process.env.GITHUB_SECRET ?? "",
+            authorization: {params:{scope: 'user'}} ,
         }),
     ],
     callbacks: {
