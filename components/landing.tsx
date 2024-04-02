@@ -1,9 +1,10 @@
 
 import authOptions from "@/lib/auth";
-import { Button } from "./ui/button";
+import { Button, buttonVariants } from "./ui/button";
 import { getServerSession } from "next-auth";
 import Link from "next/link"
 import ButtonIn from "./login";
+import { cn } from "@/lib/utils";
 
 export async function Landing() {
   const session = await getServerSession(authOptions);
@@ -19,7 +20,7 @@ export async function Landing() {
 
       <div className="flex justify-center gap-4 pt-4">
         {
-          session ? <Button ><Link href="/dashboard">Dashboard</Link></Button> : <ButtonIn/>
+          session ? <Link className={cn(buttonVariants())} href="/dashboard">Dashboard</Link> : <ButtonIn/>
         }
        <div>
         

@@ -1,0 +1,5 @@
+###
+GET https://api.github.com/issues
+Content-Type: application/json
+Authorization: Bearer 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
+X-Github-Api-Version: 2022-11-28

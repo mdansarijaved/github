@@ -12,7 +12,7 @@ import {
 } from "@/components/ui/table";
 import TableRowLink from "@/components/tablerown";
 import { fetchData } from "@/lib/utils";
-import PaginationComponent from "@/components/pagination";
+
 
 const Dashboard = async ({
   searchParams,
@@ -20,30 +20,37 @@ const Dashboard = async ({
   searchParams: { [key: string]: string | string[] | undefined };
 }) => {
   const session = await getServerSession(authOptions);
-
   console.log(session?.user.accessToken);
-  
     if (!session) {
       redirect("/");
     }
 
   
-    const response = await fetch(`https://api.github.com/user/repos`, {
-      headers: {
-        'Authorization': `${session.user.accessToken}`,
+    // const response = await fetch(`https://api.github.com/user/repos`, {
+    //   headers: {
+    //     'Authorization': `${session.user.accessToken}`,
        
-      },
+    //   },
 
-    });
-    const entries = await response.json();
+    // });
+    // const entries = await response.json();
+    // console.log(entries);
+    const responseIssues   = await fetch('https://api.github.com/user/issues', {
+      method: 'GET',
+        headers: {
+          Authorization: `token ${session.user.accessToken}`,
+          'X-GitHub-Api-Version': '2022-11-28',
+        },
+      });
+    const entries = await responseIssues.json();
     console.log(entries);
-
-
+    
+      
   
   return (
-    // <Suspense fallback={<div>Loading...</div>}>
+
     <main className="flex  flex-1 flex-col gap-4 p-4 md:gap-8 md:p-10">
-      {/* <Suspense fallback={<div>Loading...</div>}> */}
+
       <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-4">
         <Card>
           <CardHeader className="flex flex-row items-center justify-between pb-2 space-y-0">
@@ -121,10 +128,9 @@ const Dashboard = async ({
           </Table>
         </Card>
       </div>
-      {/* </Suspense> */}
-      <PaginationComponent hasNextPage={true} hasPreviousPage={true} />
+  
     </main>
-    // </Suspense>
+ 
   );
 };
 

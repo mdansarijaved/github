@@ -16,6 +16,7 @@ const authOptions:AuthOptions = {
           method: 'GET',
             headers: {
               Authorization: `token ${token.accessToken}`,
+              'X-GitHub-Api-Version': '2022-11-28',
             },
           });
           const user = await userResponse.json(); 
