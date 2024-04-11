@@ -20,7 +20,7 @@ export async function Landing() {
 
       <div className="flex justify-center gap-4 pt-4">
         {
-          session ? <Link className={cn(buttonVariants())} href="/dashboard">Dashboard</Link> : <ButtonIn/>
+          session ? <Link className={cn(buttonVariants())} href={`/dashboard/`}>Dashboard</Link> : <ButtonIn/>
         }
        <div>
         

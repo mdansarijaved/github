@@ -4,18 +4,48 @@ import { ModeToggle } from "./theme-toggle";
 import { signIn, signOut, useSession } from "next-auth/react";
 import { Button } from "./ui/button";
 import Link from "next/link";
+import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuLabel, DropdownMenuSeparator, DropdownMenuTrigger } from "./ui/dropdown-menu";
+import Image from "next/image";
+
+
+
 
 
 const AuthButton = () => {
   const session = useSession();
+
   if (session.status == 'authenticated') {
+    const {user} = session.data; 
     return (
       <>
-        <div className="rounded-full"></div>
-        <br />
-        <Button variant={"secondary"} onClick={() => signOut()}>
-          Sign Out
-        </Button>
+          <DropdownMenu>
+          <DropdownMenuTrigger className="">
+            <Button className="rounded-full" size="icon" variant="ghost">
+              <Image
+                alt="Avatar"
+                className="rounded-full"
+                height="32"
+                src={user.image ?? ""}
+                style={{
+                  aspectRatio: "32/32",
+                  objectFit: "cover",
+                }}
+                width="32"
+              />
+              <span className="sr-only">Toggle user menu</span>
+            </Button>
+          </DropdownMenuTrigger>
+          <DropdownMenuContent className="border border-gray-200 px-2 py-2 rounded bg-white mx-6">
+            <DropdownMenuLabel>My Account</DropdownMenuLabel>
+            <DropdownMenuSeparator />
+            <DropdownMenuItem>Profile</DropdownMenuItem>
+            <DropdownMenuItem>Billing</DropdownMenuItem>
+            <DropdownMenuItem>Team</DropdownMenuItem>
+            <DropdownMenuItem>
+                <span onClick={()=>signOut()}>Sign out</span>
+            </DropdownMenuItem>
+          </DropdownMenuContent>
+        </DropdownMenu>
       </>
     );
   }

@@ -7,7 +7,7 @@ const authOptions:AuthOptions = {
         GithubProvider({
             clientId: process.env.GITHUB_ID ?? "",
             clientSecret: process.env.GITHUB_SECRET ?? "",
-            authorization: {params:{scope: 'user'}} ,
+            authorization: {params:{scope: 'user : email '}} ,
         }),
     ],
     callbacks: {
