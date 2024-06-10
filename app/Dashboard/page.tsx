@@ -32,6 +32,7 @@ const Dashboard = async ({ params }: { params: { username: string } }) => {
             alt="userimage"
             className="rounded-full w-52 h-52"
           />
+          <div>hellow</div>
           <div className="h-full flex justify-center items-start flex-col">
             <div>
               <a href={session?.user.html_url} className="font-semibold">
