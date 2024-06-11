@@ -1,6 +1,5 @@
 import { Button, buttonVariants } from "./ui/button";
 import Link from "next/link";
-import ButtonIn from "./login";
 import { cn } from "@/lib/utils";
 import { Yeseva_One } from "next/font/google";
 import { AppWindowIcon, Github } from "lucide-react";
