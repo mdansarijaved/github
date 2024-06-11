@@ -5,7 +5,7 @@ import { cn } from "../lib/utils";
 import "./globals.css";
 import NavBar from "@/components/nav-bar";
 import SessionProvider from "@/components/sessionProvider";
-import { getServerSession } from "next-auth";
+// import { getServerSession } from "next-auth";
 const fontSans = FontSans({
   subsets: ["latin"],
   variable: "--font-sans",
@@ -21,7 +21,7 @@ export default async function RootLayout({
 }: {
   children: React.ReactNode;
 }) {
-  const session = await getServerSession(); 
+  // const session = await getServerSession();
 
   return (
     <html suppressHydrationWarning lang="en" className="h-full">
@@ -31,17 +31,17 @@ export default async function RootLayout({
           fontSans.variable
         )}
       >
-        <SessionProvider session={session}>
+        {/* <SessionProvider session={session}> */}
         <ThemeProvider
-            attribute="class"
-            defaultTheme="system"
-            enableSystem
-            // disableTransitionOnChange
-            >
-            <NavBar/>
-            {children}
-          </ThemeProvider>
-            </SessionProvider>
+          attribute="class"
+          defaultTheme="system"
+          enableSystem
+          // disableTransitionOnChange
+        >
+          <NavBar />
+          {children}
+        </ThemeProvider>
+        {/* </SessionProvider> */}
       </body>
     </html>
   );
