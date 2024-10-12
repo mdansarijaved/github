@@ -41,7 +41,7 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
         };
         session.user = extendedSession;
       }
-      console.log(token);
+
       return session;
     },
     async jwt({ token, user, account, profile }) {
@@ -49,7 +49,6 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
         token.accessToken = account.access_token!;
       }
       if (profile) {
-        console.log("profile", profile);
         token.login = profile.login as string;
         token.id = profile.id as string;
         token.node_id = profile.node_id as string;
@@ -72,7 +71,7 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
         token.created_at = profile.created_at as string;
         token.updated_at = profile.updated_at as string;
       }
-      console.log("this is token", token);
+
       return token;
     },
   },
