@@ -2,8 +2,9 @@
 import React, { useState } from "react";
 import { Button } from "../ui/button";
 import {
-  ArrowLeft,
-  ArrowRight,
+  ChevronLeft,
+  ChevronRight,
+  GitBranchPlus,
   Home,
   OrbitIcon,
   Projector,
@@ -12,6 +13,7 @@ import {
 import { Avatar, AvatarFallback, AvatarImage } from "../ui/avatar";
 import { useQuery } from "@tanstack/react-query";
 import { getUser } from "@/app/actions/user/user";
+import Link from "next/link";
 
 function WorkSpaceSideBar() {
   const [isCollapsed, setIsCollapsed] = useState(false);
@@ -22,26 +24,35 @@ function WorkSpaceSideBar() {
 
   const sidebarItems = [
     {
-      Icon: <Home />,
+      Icon: <Home size={20} />,
       Name: "Home",
+      path: `/workspace/${user?.id}/`,
     },
     {
-      Icon: <Projector />,
+      Icon: <Projector size={20} />,
       Name: "Project",
+      path: `/workspace/${user?.id}/project/`,
     },
     {
-      Icon: <SquareKanban />,
+      Icon: <SquareKanban size={20} />,
       Name: "Issues",
+      path: `/workspace/${user?.id}/issues/`,
     },
     {
-      Icon: <OrbitIcon />,
+      Icon: <OrbitIcon size={20} />,
       Name: "Spaces",
+      path: `/workspace/${user?.id}/spaces/`,
+    },
+    {
+      Icon: <GitBranchPlus size={20} />,
+      Name: "Repository",
+      path: `/workspace/${user?.id}/repository`,
     },
   ];
 
   return (
-    <div
-      className="h-full border-r w-[--width] flex flex-col justify-between items-center px-2  py-10 transition-all duration-300"
+    <aside
+      className="h-full border-r w-[--width] flex flex-col justify-between items-center px-2  py-3 transition-all "
       style={
         {
           "--width": isCollapsed ? "4rem" : "16rem",
@@ -49,20 +60,53 @@ function WorkSpaceSideBar() {
       }
     >
       <div className="h-full w-full flex flex-col gap-3 justify-start items-start">
+        {isCollapsed ? (
+          <div className="w-full ">
+            <Button
+              variant={"outline"}
+              className=""
+              onClick={() => setIsCollapsed(!isCollapsed)}
+            >
+              {isCollapsed ? (
+                <ChevronRight size={16} />
+              ) : (
+                <ChevronLeft size={16} />
+              )}
+            </Button>
+          </div>
+        ) : (
+          <div className="w-full text-end flex justify-between items-center pl-3">
+            <Link href={"/"} className={`text-xl font-semibold transition-all`}>
+              GitStats
+            </Link>
+            <Button
+              variant={"outline"}
+              onClick={() => setIsCollapsed(!isCollapsed)}
+            >
+              {isCollapsed ? (
+                <ChevronRight size={16} />
+              ) : (
+                <ChevronLeft size={16} />
+              )}
+            </Button>
+          </div>
+        )}
+
         {sidebarItems.map((Item) => (
-          <div
+          <Link
+            href={Item.path}
             key={Item.Name}
-            className="px-3 py-2  w-full flex text-muted-foreground hover:text-blue-500 justify-start rounded-lg hover:bg-gray-300 transition-all duration-300"
+            className="px-3 py-2  w-full flex text-muted-foreground hover:text-blue-500 justify-start rounded-lg hover:bg-gray-200 transition-all duration-300"
           >
             {isCollapsed ? (
               <span className="">{Item.Icon}</span>
             ) : (
-              <p className="flex justify-center items-center gap-3 ">
+              <p className="flex justify-center items-center gap-3 text-sm ">
                 <span className="">{Item.Icon}</span>
                 {Item.Name}
               </p>
             )}
-          </div>
+          </Link>
         ))}
       </div>
       <div className="w-full flex flex-col justify-center  items-start gap-3">
@@ -70,16 +114,8 @@ function WorkSpaceSideBar() {
           <AvatarImage src={user?.avatar_url} />
           <AvatarFallback>CN</AvatarFallback>
         </Avatar>
-        <div className="w-full text-end">
-          <Button
-            variant={"outline"}
-            onClick={() => setIsCollapsed(!isCollapsed)}
-          >
-            {isCollapsed ? <ArrowRight size={16} /> : <ArrowLeft size={16} />}
-          </Button>
-        </div>
       </div>
-    </div>
+    </aside>
   );
 }
 

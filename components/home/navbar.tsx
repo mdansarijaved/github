@@ -1,6 +1,7 @@
 import { auth, signIn, signOut } from "@/auth";
 import React from "react";
 import { Button } from "../ui/button";
+import { NavigationMenuDemo } from "./NavMenu";
 
 async function NavBar() {
   const user = await auth();
@@ -11,6 +12,7 @@ async function NavBar() {
       <p className="text-3xl font-black  bg-clip-text text-transparent bg-gradient-to-b from-neutral-200 to-neutral-600 ">
         GitStats
       </p>
+      <NavigationMenuDemo />
       {user ? (
         <div className="flex justify-center items-center gap-5">
           <span className="hover:underline text-white cursor-pointer">
