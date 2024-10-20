@@ -10,6 +10,7 @@ import {
   NavigationMenuTrigger,
 } from "@/components/ui/navigation-menu";
 import { Waypoints, Workflow } from "lucide-react";
+import Link from "next/link";
 
 const components: { title: string; href: string; description: string }[] = [
   {
@@ -41,28 +42,27 @@ export function NavigationMenuDemo() {
             Workspace
           </NavigationMenuTrigger>
           <NavigationMenuContent>
-            <ul className="grid gap-3 p-6 md:w-[400px] lg:w-[500px] lg:grid-cols-[.75fr_1fr]">
+            <ul className="grid gap-3 p-6 md:w-[400px] lg:w-[500px] lg:grid-cols-[1fr_1fr]">
               <li className="">
                 <NavigationMenuLink asChild>
-                  <a
-                    className="flex h-full w-full select-none flex-col justify-end rounded-md bg-gradient-to-b from-muted/50 to-muted p-6 no-underline outline-none focus:shadow-md"
+                  <Link
+                    className="flex h-full w-full select-none flex-col justify-end rounded-md  no-underline hover:bg-gradient-to-b from-muted/50 to-muted p-6  outline-none "
                     href="/"
                   >
                     <Waypoints size={24} />
                     <div className="mb-2 mt-4 text-lg font-medium">
-                      Workspace
+                      Workspaces
                     </div>
                     <p className="text-sm leading-tight text-muted-foreground">
                       Start using your Workspace
                     </p>
-                  </a>
+                  </Link>
                 </NavigationMenuLink>{" "}
               </li>
-
               <li>
                 <NavigationMenuLink asChild>
                   <a
-                    className="flex h-full w-full select-none flex-col justify-end rounded-md bg-gradient-to-b from-muted/50 to-muted p-6 no-underline outline-none focus:shadow-md"
+                    className="flex h-full w-full select-none flex-col justify-end rounded-md hover:bg-gradient-to-b from-muted/50 to-muted p-6 no-underline outline-none "
                     href="/"
                   >
                     <Workflow size={24} />
@@ -70,7 +70,7 @@ export function NavigationMenuDemo() {
                       New workspace
                     </div>
                     <p className="text-sm leading-tight text-muted-foreground">
-                      Create a new Workspace
+                      Create a new Workspace and start working
                     </p>
                   </a>
                 </NavigationMenuLink>

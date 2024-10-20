@@ -14,6 +14,7 @@ import { Avatar, AvatarFallback, AvatarImage } from "../ui/avatar";
 import { useQuery } from "@tanstack/react-query";
 import { getUser } from "@/app/actions/user/user";
 import Link from "next/link";
+import { ModeToggle } from "../theme-toggle";
 
 function WorkSpaceSideBar() {
   const [isCollapsed, setIsCollapsed] = useState(false);
@@ -26,33 +27,33 @@ function WorkSpaceSideBar() {
     {
       Icon: <Home size={20} />,
       Name: "Home",
-      path: `/workspace/${user?.id}/`,
+      path: `/workspace`,
     },
     {
       Icon: <Projector size={20} />,
       Name: "Project",
-      path: `/workspace/${user?.id}/project/`,
+      path: `/workspace/project/`,
     },
     {
       Icon: <SquareKanban size={20} />,
       Name: "Issues",
-      path: `/workspace/${user?.id}/issues/`,
+      path: `/workspace/issues/`,
     },
     {
       Icon: <OrbitIcon size={20} />,
       Name: "Spaces",
-      path: `/workspace/${user?.id}/spaces/`,
+      path: `/workspace/spaces/`,
     },
     {
       Icon: <GitBranchPlus size={20} />,
       Name: "Repository",
-      path: `/workspace/${user?.id}/repository`,
+      path: `/workspace/repository`,
     },
   ];
 
   return (
     <aside
-      className="h-full border-r w-[--width] flex flex-col justify-between items-center px-2  py-3 transition-all "
+      className="h-full  border-r w-[--width] flex flex-col justify-between items-center px-2  py-3 transition-all "
       style={
         {
           "--width": isCollapsed ? "4rem" : "16rem",
@@ -110,6 +111,7 @@ function WorkSpaceSideBar() {
         ))}
       </div>
       <div className="w-full flex flex-col justify-center  items-start gap-3">
+        <ModeToggle />
         <Avatar>
           <AvatarImage src={user?.avatar_url} />
           <AvatarFallback>CN</AvatarFallback>

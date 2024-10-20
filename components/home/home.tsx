@@ -1,7 +1,7 @@
 "use client";
 import React, { useRef } from "react";
 import { BackgroundBeams } from "../ui/background-beams";
-import { Button, buttonVariants } from "../ui/button";
+import { buttonVariants } from "../ui/button";
 import Link from "next/link";
 import { cn } from "@/lib/utils";
 import { motion, useInView } from "framer-motion";
@@ -47,7 +47,7 @@ export function BackgroundBeamsDemo() {
           <div className="text-center">
             {user ? (
               <Link
-                href={`/workspace/${user.id}`}
+                href={`/workspace`}
                 className={cn(
                   buttonVariants({ variant: "outline" }),
                   "relative z-10 mt-4 bg-gradient-to-b from-neutral-200 to-neutral-600 border-none"

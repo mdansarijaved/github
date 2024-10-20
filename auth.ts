@@ -14,7 +14,6 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
           login: token.login,
           node_id: token.node_id,
           avatar_url: token.avatar_url,
-
           followers_url: token.followers_url,
           following_url: token.following_url,
           gists_url: token.gists_url,
